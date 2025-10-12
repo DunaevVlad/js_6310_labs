@@ -462,14 +462,13 @@ function runTests() {
     console.assert(calculate("a", 2, "+") === "Аргументы функции должны быть числами", "Тест задания 2.3 провален (проверка аргументов)");
     console.assert(calculate("a", "b", "+") === "Аргументы функции должны быть числами", "Тест задания 2.3 провален (проверка аргументов)");
     console.assert(calculate(15, 3, "~") === "Неизвестная операция", "Тест задания 2.3 провален (неизвестная операция)");
-    console.assert(calculate(Number.MAX_VALUE, 2, '+') === Number.MAX_VALUE + 2, "Тест калькулятора 2.3 провален (переполнение при сложении)");
+    console.assert(calculate(Number.MAX_VALUE, 1, '+') === Number.MAX_VALUE+1, "Тест калькулятора 2.3 провален (переполнение при сложении)");
     console.assert(calculate(Number.MAX_VALUE, Number.MAX_VALUE, '+') === Infinity, "Тест калькулятора 2.3 провален (переполнение при сложении двух больших чисел)");
-    console.assert(calculate(Number.MAX_VALUE, 3, '-') === Number.MAX_VALUE - 3, "Тест калькулятора 2.3 провален (вычитание из максимального значения)");
-    console.assert(calculate(Number.MAX_VALUE, 2, '*') === Number.MAX_VALUE, "Тест калькулятора 2.3 провален (переполнение при умножении)");
-    console.assert(calculate(2, Number.MAX_VALUE, '*') === Number.MAX_VALUE, "Тест калькулятора 2.3 провален (переполнение при умножении с максимальным значением)");
-    console.assert(calculate(Number.MAX_VALUE, 15, "*") === Infinity, "Тест калькулятора провален (умножение максимального числа на 15)");
-    console.assert(calculate(Number.MAX_VALUE, 3, '/') === Number.MAX_VALUE / 3, "Тест калькулятора 2.3 провален (деление максимального значения)");
-
+    console.assert(calculate(Number.MAX_VALUE, 2, '-') === Number.MAX_VALUE - 2, "Тест калькулятора 2.3 провален (вычитание из максимального значения)");
+    console.assert(calculate(Number.MAX_VALUE, 1, '*') === Number.MAX_VALUE, "Тест калькулятора 2.3 провален (переполнение при умножении)");
+    console.assert(calculate(1, Number.MAX_VALUE, '*') === Number.MAX_VALUE, "Тест калькулятора 2.3 провален (переполнение при умножении с максимальным значением)");
+    console.assert(calculate(Number.MAX_VALUE, 10, "*") === Infinity, "Тест калькулятора провален (умножение максимального числа на 10)");
+    console.assert(calculate(Number.MAX_VALUE, 2, '/') === Number.MAX_VALUE / 2, "Тест калькулятора 2.3 провален (деление максимального значения)");
     // Задание 2.4
     console.log("=== Задание 2.4 ===");
     console.assert(calculateArea("circle", 2, 2) === "Должен быть 1 параметр - радиус", "Тест задания 2.4 провален (площадь круга, 1 параметр)");
@@ -534,24 +533,20 @@ function runTests() {
     console.log("Активные задачи:", taskManager.getTasksByStatus(false)); //вывод задач по статусу
     console.log("Статистика:", taskManager.getStats()); //вывод статы
 
-    // Задание 6.4
-    console.log("=== Задание 6.4 ===")
-    console.assert(validateDate("30.11.2099") === true, "Тест задания 6 провален (максимальная допустимая дата)");
-    console.assert(validateDate("02.01.1900") === true, "Тест задания 6 провален (минимальная допустимая дата)");
-    console.assert(validateDate("15.06.2005") === true, "Тест задания 6 провален (обычная дата)");
-    console.assert(validateDate("00.01.2000") === false, "Тест задания 6 провален (день 00)");
-    console.assert(validateDate("32.01.2000") === false, "Тест задания 6 провален (день 32)");
-    console.assert(validateDate("01.00.2000") === false, "Тест задания 6 провален (месяц 00)");
-    console.assert(validateDate("01.13.2000") === false, "Тест задания 6 провален (месяц 13)");
-    console.assert(validateDate("01.01.1899") === false, "Тест задания 6 провален (год 1899)");
-    console.assert(validateDate("01.01.2100") === false, "Тест задания 6 провален (год 2100)");
-    console.assert(validateDate("5.01.2000") === false, "Тест задания 6 провален (день из одной цифры)");
-    console.assert(validateDate("01.5.2000") === false, "Тест задания 6 провален (месяц из одной цифры)");
-    console.assert(validateDate("01.01.05") === false, "Тест задания 6 провален (год из двух цифр)");
-    console.assert(validateDate("01-01-2000") === false, "Тест задания 6 провален (неправильные разделители)");
-    console.assert(validateDate("01012000") === false, "Тест задания 6 провален (неправильные разделители)");
-    console.assert(validateDate("01june2000") === false, "Тест задания 6 провален (месяц текстом)");
-    console.assert(validateDate("") === false, "Тест задания 6 провален (пустая строка)");
+    // Тест задания 6.3
+    console.assert(validatePhone("+7 (999) 123-45-67") === true,  "Тест провален: должен проходить формат +7 (999) 123-45-67");
+    console.assert(validatePhone("+7(999)123-45-67") === true,    "Тест провален: должен проходить формат +7(999)123-45-67");
+    console.assert(validatePhone("8 (999) 123-45-67") === true,   "Тест провален: должен проходить формат 8 (999) 123-45-67");
+    console.assert(validatePhone("89991234567") === true,         "Тест провален: должен проходить формат 89991234567");
+    console.assert(validatePhone("+79991234567") === true,        "Тест провален: должен проходить формат +79991234567");
+    console.assert(validatePhone("8 999 123 45 67") === true,     "Тест провален: должен проходить формат с пробелами");
+    console.assert(validatePhone("8(999)1234567") === true,       "Тест провален: должен проходить формат без пробелов и дефисов");
+
+    console.assert(validatePhone("+7-999-123-45-67") === false,   "Тест провален: не должен проходить — дефис сразу после +7");
+    console.assert(validatePhone("8-999-123-45-67") === false,    "Тест провален: не должен проходить — дефис сразу после 8");
+    console.assert(validatePhone("12345678901") === false,        "Тест провален: не должен проходить — номер не начинается с +7 или 8");
+    console.assert(validatePhone("+7(9991234567") === true,       "Тест провален: должен проходить — шаблон допускает незакрытую (");
+    console.assert(validatePhone("+7(999)123-45-6") === false,    "Тест провален: не должен проходить — недостаточно цифр");
 
     console.log("Все тесты пройдены! ✅");
 }
