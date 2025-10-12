@@ -388,7 +388,7 @@ function validatePassword(password) {
  * - +7(999)123-45-67
  */
 function validatePhone(phone) {
-    const phoneRegex = /^(\+7|8)[\s(-]?\d{3}[\s)-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}$/;
+    const phoneRegex = /^(\+7|8)\s?\(?\d{3}\)?\s?\d{3}[\s-]?\d{2}[\s-]?\d{2}$/;
     return phoneRegex.test(phone);
 }
 
