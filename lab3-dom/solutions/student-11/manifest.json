@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Rainbow Borders for KAI",
+  "version": "1.0",
+  "description": "Добавляет радужные границы к изображениям и блокам на сайтах KAI",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://kai.ru/*",
+        "https://abiturientu.kai.ru/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
