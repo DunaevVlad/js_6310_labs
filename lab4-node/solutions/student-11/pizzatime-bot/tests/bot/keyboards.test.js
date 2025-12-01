@@ -1,5 +1,5 @@
 import { jest } from '@jest/globals';
-import { getMainKeyboard } from '../../src/bot/keyboards.js';
+import { getMainKeyboard, removeInlineKeyboard } from '../../src/bot/keyboards.js';
 
 describe('Keyboards', () => {
   describe('getMainKeyboard', () => {
@@ -27,6 +27,23 @@ describe('Keyboards', () => {
       const keyboard = getMainKeyboard();
 
       expect(keyboard.resize_keyboard).toBe(true);
+    });
+  });
+
+  describe('removeInlineKeyboard', () => {
+    test('should keep main keyboard visible', () => {
+      const keyboard = removeInlineKeyboard();
+
+      expect(keyboard).toEqual({ remove_keyboard: false });
+    });
+
+    test('should return a frozen copy to avoid mutation side-effects', () => {
+      const keyboard = removeInlineKeyboard();
+
+      keyboard.remove_keyboard = true;
+
+      const freshKeyboard = removeInlineKeyboard();
+      expect(freshKeyboard.remove_keyboard).toBe(false);
     });
   });
 });

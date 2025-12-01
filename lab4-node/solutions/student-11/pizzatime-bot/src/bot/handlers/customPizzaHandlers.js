@@ -205,16 +205,19 @@ export function handleCustomPizzaMessage(bot, chatId, text) {
     if (state === CUSTOM_PIZZA_STATES.CUSTOM_AWAITING_ADDRESS) {
       // Пользователь ввел адрес
       handleCustomAddressInput(bot, chatId, text);
+      return true;
     } else {
       bot.sendMessage(chatId, 'Пожалуйста, используйте кнопки для выбора опций кастомной пиццы.', {
         reply_markup: getMainKeyboard()
       }).catch(error => console.error('Error sending message:', error.message));
+      return true;
     }
   } catch (error) {
     console.error('Error in handleCustomPizzaMessage:', error.message);
     bot.sendMessage(chatId, 'Произошла ошибка при обработке сообщения. Пожалуйста, попробуйте еще раз.', {
       reply_markup: getMainKeyboard()
     }).catch(err => console.error('Error sending error message:', err.message));
+    return false;
   }
 }
 

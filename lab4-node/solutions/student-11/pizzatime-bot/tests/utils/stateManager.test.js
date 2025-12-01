@@ -144,6 +144,41 @@ describe('StateManager', () => {
       expect(updatedOrder.updatedAt).toBeInstanceOf(Date);
     });
 
+    test.each([
+      ['preparing', 35],
+      ['baking', 25],
+      ['ready', 20],
+      ['delivering', 15],
+      ['delivered', 0]
+    ])('should adjust estimated delivery for %s status', (status, minutes) => {
+      const userId = 54321;
+      const orderData = {
+        items: ['Four Seasons'],
+        total: 750,
+        type: 'menu',
+        address: 'Another address',
+        deliveryTime: 30
+      };
+
+      const fixedNow = 1_700_000_000_000;
+      const shouldMockNow = minutes > 0;
+      const nowSpy = shouldMockNow ? jest.spyOn(Date, 'now').mockReturnValue(fixedNow) : null;
+
+      const order = manager.createOrder(userId, orderData);
+      const updatedOrder = manager.updateOrderStatus(order.id, status);
+
+      expect(updatedOrder.status).toBe(status);
+
+      if (minutes === 0) {
+        expect(updatedOrder.estimatedDelivery.getTime()).toBeLessThanOrEqual(Date.now());
+      } else {
+        const expectedTimestamp = fixedNow + minutes * 60 * 1000;
+        expect(updatedOrder.estimatedDelivery.getTime()).toBe(expectedTimestamp);
+      }
+
+      nowSpy?.mockRestore();
+    });
+
     test('should return null when updating non-existent order', () => {
       const result = manager.updateOrderStatus('non_existent_order', 'preparing');
 

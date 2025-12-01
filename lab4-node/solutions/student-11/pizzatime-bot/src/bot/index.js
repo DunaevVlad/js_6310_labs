@@ -113,18 +113,21 @@ class PizzaBot {
       if (msg.text && msg.text.startsWith('/')) return;
 
       const chatId = msg.chat.id;
-      const text = msg.text;
+      const text = msg.text ?? '';
 
       stateManager.updateActivity(chatId);
       
       const state = stateManager.getState(chatId);
+      let handled = false;
 
       try {
         if (state && state.startsWith('MENU')) {
-          menuHandlers.handleMenuMessage(this.bot, chatId, text);
+          handled = menuHandlers.handleMenuMessage(this.bot, chatId, text) === true;
         } else if (state && state.startsWith('CUSTOM')) {
-          customPizzaHandlers.handleCustomPizzaMessage(this.bot, chatId, text);
-        } else {
+          handled = customPizzaHandlers.handleCustomPizzaMessage(this.bot, chatId, text) === true;
+        }
+
+        if (!handled) {
           this.bot.sendMessage(chatId, 'Пожалуйста, используйте команды из меню для взаимодействия с ботом.', {
             reply_markup: getMainKeyboard()
           }).catch(error => console.error('Error sending message:', error.message));

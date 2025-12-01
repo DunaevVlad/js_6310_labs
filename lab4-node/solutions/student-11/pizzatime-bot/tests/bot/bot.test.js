@@ -27,7 +27,8 @@ jest.unstable_mockModule('../../src/utils/stateManager.js', () => ({
 }));
 
 jest.unstable_mockModule('../../src/bot/handlers/menuHandlers.js', () => ({
-  handleMenuStart: jest.fn()
+  handleMenuStart: jest.fn(),
+  handleMenuMessage: jest.fn()  // Добавлена эта строка
 }));
 
 jest.unstable_mockModule('../../src/bot/handlers/customPizzaHandlers.js', () => ({

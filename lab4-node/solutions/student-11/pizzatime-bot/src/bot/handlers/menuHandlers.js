@@ -207,21 +207,25 @@ export function handleMenuMessage(bot, chatId, text) {
     if (state === MENU_STATES.MENU_AWAITING_ADDRESS) {
       // Пользователь ввел адрес
       handleAddressInput(bot, chatId, text);
+      return true;
     }
     else if (state === MENU_STATES.MENU_SELECT_EXTRAS) {
       bot.sendMessage(chatId, 'Пожалуйста, используйте кнопки для выбора дополнительных ингредиентов.', {
         reply_markup: getMainKeyboard()
       }).catch(error => console.error('Error sending message:', error.message));
+      return true;
     } else {
       bot.sendMessage(chatId, 'Пожалуйста, используйте кнопки для навигации по меню.', {
         reply_markup: getMainKeyboard()
       }).catch(error => console.error('Error sending message:', error.message));
+      return true;
     }
   } catch (error) {
     console.error('Error in handleMenuMessage:', error.message);
     bot.sendMessage(chatId, 'Произошла ошибка при обработке сообщения. Пожалуйста, попробуйте еще раз.', {
       reply_markup: getMainKeyboard()
     }).catch(err => console.error('Error sending error message:', err.message));
+    return false;
   }
 }
 

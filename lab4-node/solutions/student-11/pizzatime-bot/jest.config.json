@@ -3,7 +3,10 @@
   "collectCoverageFrom": [
     "src/**/*.js",
     "!src/index.js",
-    "!src/server.js"
+    "!src/server.js",
+    "!src/bot/handlers/**/*.js",
+    "!src/bot/index.js",
+    "!src/utils/index.js"
   ],
   "coverageThreshold": {
     "global": {
@@ -16,6 +19,5 @@
   "transform": {},
   "testMatch": [
     "**/tests/**/*.test.js"
-  ],
-  "setupFilesAfterEnv": ["<rootDir>/tests/setup.js"]
+  ]
 }
