@@ -1,8 +1,8 @@
 export class Validators {
   static validatePhone(phone) {
-  const phoneRegex = /^(\+7|8)?9\d{9}$/;
-  return phoneRegex.test(phone.trim());
-}
+    const phoneRegex = /^(\+7|8)?9\d{9}$/;
+    return phoneRegex.test(phone.trim());
+  }
 
   static validateEmail(email) {
     if (!email) return false;
@@ -48,31 +48,31 @@ export class Validators {
     switch (type) {
       case 'phone':
         return this.validatePhone(trimmed);
-      
+        
       case 'email':
         return this.validateEmail(trimmed);
-      
+        
       case 'name':
         return this.validateName(trimmed);
-      
+        
       case 'address':
         return this.validateAddress(trimmed);
-      
+        
       case 'text':
         return trimmed.length > 0 && trimmed.length <= 500;
-      
+        
       default:
         return trimmed.length > 0;
     }
   }
 
   static sanitizeInput(input) {
-  if (typeof input !== 'string') return '';
-  
-  return input
-    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // удаляем теги script
-    .replace(/[<>"'`]/g, '') // удаляем опасные символы
-    .substring(0, 500); // ограничиваем длину
+    if (typeof input !== 'string') return '';
+    
+    return input
+        .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // удаляем теги script
+        .replace(/[<>"'`]/g, '') // удаляем опасные символы
+        .substring(0, 500); // ограничиваем длину
   }
 
   static validateCallbackData(data, expectedPrefixes) {

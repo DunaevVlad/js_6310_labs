@@ -29,8 +29,7 @@ jest.unstable_mockModule('../../src/bot/keyboards.js', () => ({
 // Now import the modules
 const { stateManager } = await import('../../src/utils/stateManager.js');
 const { PriceCalculator } = await import('../../src/utils/priceCalculator.js');
-const { getMainKeyboard } = await import('../../src/bot/keyboards.js');
-const { MENU_STATES, PIZZAS, SIZES, DOUGH_TYPES, EXTRAS } = await import('../../src/bot/states/menuState.js');
+const { MENU_STATES } = await import('../../src/bot/states/menuState.js');
 const { handleMenuStart, handleMenuCallback, handleMenuMessage } = await import('../../src/bot/handlers/menuHandlers.js');
 
 describe('Menu Handlers', () => {

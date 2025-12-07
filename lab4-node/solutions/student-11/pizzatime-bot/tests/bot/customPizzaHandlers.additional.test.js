@@ -58,7 +58,6 @@ jest.unstable_mockModule('../../src/bot/states/customPizzaState.js', () => ({
 // Now import the modules
 const { stateManager } = await import('../../src/utils/stateManager.js');
 const { PriceCalculator } = await import('../../src/utils/priceCalculator.js');
-const { getMainKeyboard } = await import('../../src/bot/keyboards.js');
 const { CUSTOM_PIZZA_STATES } = await import('../../src/bot/states/customPizzaState.js');
 const { handleCustomPizzaCallback, handleCustomPizzaMessage } = await import('../../src/bot/handlers/customPizzaHandlers.js');
 

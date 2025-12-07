@@ -25,7 +25,7 @@ try {
   console.log('🚀 Запуск PizzaTime 2 бота...');
   
   // Создаем и запускаем бота
-  const bot = new PizzaBot();
+  new PizzaBot();
   
   // Обработка graceful shutdown
   process.on('SIGINT', () => {

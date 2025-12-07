@@ -49,16 +49,12 @@ global.console.log = jest.fn();
 global.console.error = jest.fn();
 
 // Import after mocks
-const { config } = await import('dotenv');
 const TelegramBot = (await import('node-telegram-bot-api')).default;
 const { stateManager } = await import('../../src/utils/stateManager.js');
 const { handleMenuCallback, handleMenuMessage } = await import('../../src/bot/handlers/menuHandlers.js');
-const { handleCustomPizzaCallback, handleCustomPizzaMessage } = await import('../../src/bot/handlers/customPizzaHandlers.js');
-const { handleOrderStatusCallback } = await import('../../src/bot/handlers/orderStatusHandlers.js');
 const PizzaBot = (await import('../../src/bot/index.js')).default;
 
 describe('PizzaBot - Additional Tests', () => {
-  let bot;
   let mockBotInstance;
 
   beforeEach(() => {
@@ -75,7 +71,7 @@ describe('PizzaBot - Additional Tests', () => {
     };
     TelegramBot.mockImplementation(() => mockBotInstance);
     
-    bot = new PizzaBot();
+    new PizzaBot();
   });
 
   afterEach(() => {

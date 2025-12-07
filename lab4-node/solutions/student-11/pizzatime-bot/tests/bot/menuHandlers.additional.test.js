@@ -60,7 +60,6 @@ jest.unstable_mockModule('../../src/bot/states/menuState.js', () => ({
 // Now import the modules
 const { stateManager } = await import('../../src/utils/stateManager.js');
 const { PriceCalculator } = await import('../../src/utils/priceCalculator.js');
-const { getMainKeyboard } = await import('../../src/bot/keyboards.js');
 const { MENU_STATES } = await import('../../src/bot/states/menuState.js');
 const { handleMenuCallback, handleMenuMessage } = await import('../../src/bot/handlers/menuHandlers.js');
 

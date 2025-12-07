@@ -69,14 +69,11 @@ ${pizza.description}
       }).catch(error => {
         console.error('Error sending pizza selection:', error.message);
       });
-    }
-    else if (data.startsWith('menu_size_')) {
+    } else if (data.startsWith('menu_size_')) {
       const sizeKey = data.replace('menu_size_', '');
       stateManager.updateUserData(chatId, { size: sizeKey });
       stateManager.setState(chatId, MENU_STATES.MENU_SELECT_DOUGH);
 
-      const userData = stateManager.getUserData(chatId);
-      const pizza = PIZZAS[userData.pizza];
       const size = SIZES[sizeKey];
 
       const message = `
@@ -97,8 +94,7 @@ ${pizza.description}
       }).catch(error => {
         console.error('Error sending size selection:', error.message);
       });
-    }
-    else if (data.startsWith('menu_dough_')) {
+    } else if (data.startsWith('menu_dough_')) {
       const doughKey = data.replace('menu_dough_', '');
       stateManager.updateUserData(chatId, { dough: doughKey });
       stateManager.setState(chatId, MENU_STATES.MENU_SELECT_EXTRAS);
@@ -124,8 +120,7 @@ ${pizza.description}
       }).catch(error => {
         console.error('Error sending dough selection:', error.message);
       });
-    }
-    else if (data.startsWith('menu_extra_')) {
+    } else if (data.startsWith('menu_extra_')) {
       const extraKey = data.replace('menu_extra_', '');
       const userData = stateManager.getUserData(chatId);
       const extras = userData.extras || [];
@@ -163,12 +158,10 @@ ${pizza.description}
       }).catch(error => {
         console.error('Error sending extras selection:', error.message);
       });
-    }
-    else if (data === 'menu_no_extras' || data === 'menu_confirm') {
+    } else if (data === 'menu_no_extras' || data === 'menu_confirm') {
       stateManager.setState(chatId, MENU_STATES.MENU_CONFIRM_ORDER);
       handleMenuConfirmation(bot, chatId);
-    }
-    else if (data === 'menu_final_confirm') {
+    } else if (data === 'menu_final_confirm') {
       // Вместо создания заказа сразу, запрашиваем адрес
       stateManager.setState(chatId, MENU_STATES.MENU_AWAITING_ADDRESS);
       
@@ -185,8 +178,7 @@ ${pizza.description}
       }).catch(error => {
         console.error('Error sending address request:', error.message);
       });
-    }
-    else if (data === 'menu_cancel') {
+    } else if (data === 'menu_cancel') {
       stateManager.resetState(chatId);
       bot.sendMessage(chatId, 'Заказ отменен. Используйте /menu для нового заказа.', {
         reply_markup: getMainKeyboard()
@@ -208,8 +200,7 @@ export function handleMenuMessage(bot, chatId, text) {
       // Пользователь ввел адрес
       handleAddressInput(bot, chatId, text);
       return true;
-    }
-    else if (state === MENU_STATES.MENU_SELECT_EXTRAS) {
+    } else if (state === MENU_STATES.MENU_SELECT_EXTRAS) {
       bot.sendMessage(chatId, 'Пожалуйста, используйте кнопки для выбора дополнительных ингредиентов.', {
         reply_markup: getMainKeyboard()
       }).catch(error => console.error('Error sending message:', error.message));
@@ -252,7 +243,7 @@ function handleMenuConfirmation(bot, chatId) {
     }
 
     message += `\n\nИтого: ${totalPrice}₽`;
-    message += `\n\nПодтверждаете заказ?`;
+    message += '\n\nПодтверждаете заказ?';
 
     bot.sendMessage(chatId, message, {
       reply_markup: {

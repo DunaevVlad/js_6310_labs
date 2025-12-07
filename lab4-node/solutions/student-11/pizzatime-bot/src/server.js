@@ -142,7 +142,7 @@ app.use('*', (req, res) => {
 });
 
 // Обработка ошибок
-app.use((error, req, res, next) => {
+app.use((error, req, res) => {
   console.error('API Error:', error);
   res.status(500).json({ 
     error: 'Internal server error' 

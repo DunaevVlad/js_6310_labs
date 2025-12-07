@@ -1,4 +1,3 @@
-import { jest } from '@jest/globals';
 import { getMainKeyboard, removeInlineKeyboard } from '../../src/bot/keyboards.js';
 
 describe('Keyboards', () => {

@@ -35,7 +35,7 @@ describe('Validators', () => {
     test('should validate correct names', () => {
       expect(Validators.validateName('John Doe')).toBe(true);
       expect(Validators.validateName('Анна-Мария')).toBe(true);
-      expect(Validators.validateName("O'Connor")).toBe(true);
+      expect(Validators.validateName('O\'Connor')).toBe(true);
     });
 
     test('should reject invalid names', () => {
@@ -95,7 +95,7 @@ describe('Validators', () => {
 
   describe('sanitizeInput', () => {
     test('should remove dangerous HTML tags', () => {
-      const input = 'Hello <script>alert("xss")</script> World';
+      const input = 'Hello <script>alert(\'xss\')</script> World';
       
       const sanitized = Validators.sanitizeInput(input);
       

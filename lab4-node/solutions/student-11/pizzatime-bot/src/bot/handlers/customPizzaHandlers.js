@@ -64,8 +64,7 @@ export function handleCustomPizzaCallback(bot, chatId, data) {
       }).catch(error => {
         console.error('Error sending sauce selection:', error.message);
       });
-    }
-    else if (data.startsWith('custom_cheese_')) {
+    } else if (data.startsWith('custom_cheese_')) {
       const cheeseKey = data.replace('custom_cheese_', '');
       stateManager.updateUserData(chatId, { cheese: cheeseKey });
       stateManager.setState(chatId, CUSTOM_PIZZA_STATES.CUSTOM_SELECT_TOPPINGS);
@@ -100,8 +99,7 @@ export function handleCustomPizzaCallback(bot, chatId, data) {
       }).catch(error => {
         console.error('Error sending cheese selection:', error.message);
       });
-    }
-    else if (data.startsWith('custom_topping_')) {
+    } else if (data.startsWith('custom_topping_')) {
       const toppingKey = data.replace('custom_topping_', '');
       const userData = stateManager.getUserData(chatId);
       const toppings = userData.toppings || [];
@@ -155,18 +153,15 @@ export function handleCustomPizzaCallback(bot, chatId, data) {
       }).catch(error => {
         console.error('Error sending toppings selection:', error.message);
       });
-    }
-    else if (data === 'custom_continue') {
+    } else if (data === 'custom_continue') {
       stateManager.setState(chatId, CUSTOM_PIZZA_STATES.CUSTOM_SELECT_SIZE);
       handleCustomSizeSelection(bot, chatId);
-    }
-    else if (data.startsWith('custom_size_')) {
+    } else if (data.startsWith('custom_size_')) {
       const sizeKey = data.replace('custom_size_', '');
       stateManager.updateUserData(chatId, { size: sizeKey });
       stateManager.setState(chatId, CUSTOM_PIZZA_STATES.CUSTOM_CONFIRM_ORDER);
       handleCustomConfirmation(bot, chatId);
-    }
-    else if (data === 'custom_final_confirm') {
+    } else if (data === 'custom_final_confirm') {
       // Вместо создания заказа сразу, запрашиваем адрес
       stateManager.setState(chatId, CUSTOM_PIZZA_STATES.CUSTOM_AWAITING_ADDRESS);
       
@@ -183,8 +178,7 @@ export function handleCustomPizzaCallback(bot, chatId, data) {
       }).catch(error => {
         console.error('Error sending address request:', error.message);
       });
-    }
-    else if (data === 'custom_cancel') {
+    } else if (data === 'custom_cancel') {
       stateManager.resetState(chatId);
       bot.sendMessage(chatId, 'Заказ отменен. Используйте /custom_pizza для создания новой пиццы.', {
         reply_markup: getMainKeyboard()
@@ -272,11 +266,11 @@ function handleCustomConfirmation(bot, chatId) {
     if (toppings.length > 0) {
       message += `\nНачинки: ${toppings.map(t => t.name).join(', ')}`;
     } else {
-      message += `\nНачинки: классическая`;
+      message += '\nНачинки: классическая';
     }
 
     message += `\n\nИтого: ${totalPrice}₽`;
-    message += `\n\nПодтверждаете заказ?`;
+    message += '\n\nПодтверждаете заказ?';
 
     bot.sendMessage(chatId, message, {
       reply_markup: {

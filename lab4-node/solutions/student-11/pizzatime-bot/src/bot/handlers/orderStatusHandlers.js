@@ -112,8 +112,7 @@ ${order.items.map(item => `• ${item}`).join('\n')}
           reply_markup: getMainKeyboard()
         }).catch(error => console.error('Error sending not found message:', error.message));
       }
-    }
-    else if (data === 'status_back') {
+    } else if (data === 'status_back') {
       handleOrderStatus(bot, chatId);
     }
   } catch (error) {

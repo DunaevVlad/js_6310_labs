@@ -17,8 +17,6 @@ jest.unstable_mockModule('../../src/bot/keyboards.js', () => ({
 
 // Now import the modules
 const { stateManager } = await import('../../src/utils/stateManager.js');
-const { getMainKeyboard } = await import('../../src/bot/keyboards.js');
-const { ORDER_STATUSES } = await import('../../src/bot/states/orderStatusState.js');
 const { handleOrderStatusCallback } = await import('../../src/bot/handlers/orderStatusHandlers.js');
 
 describe('Order Status Handlers - Additional Tests', () => {

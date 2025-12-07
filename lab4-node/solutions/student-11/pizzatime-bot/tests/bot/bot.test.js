@@ -47,17 +47,14 @@ jest.unstable_mockModule('../../src/bot/keyboards.js', () => ({
 global.console.log = jest.fn();
 
 // Import after mocks
-const { config } = await import('dotenv');
 const TelegramBot = (await import('node-telegram-bot-api')).default;
 const { stateManager } = await import('../../src/utils/stateManager.js');
 const { handleMenuStart } = await import('../../src/bot/handlers/menuHandlers.js');
 const { handleCustomPizzaStart } = await import('../../src/bot/handlers/customPizzaHandlers.js');
 const { handleOrderStatus } = await import('../../src/bot/handlers/orderStatusHandlers.js');
-const { getMainKeyboard } = await import('../../src/bot/keyboards.js');
 const PizzaBot = (await import('../../src/bot/index.js')).default;
 
 describe('PizzaBot', () => {
-  let bot;
   let mockBotInstance;
 
   beforeEach(() => {
@@ -75,7 +72,7 @@ describe('PizzaBot', () => {
     };
     TelegramBot.mockImplementation(() => mockBotInstance);
     
-    bot = new PizzaBot();
+    new PizzaBot();
   });
 
   afterEach(() => {
